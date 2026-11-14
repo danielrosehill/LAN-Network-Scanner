@@ -5,6 +5,7 @@ services:
     build: .
     image: network-scanner:local
     container_name: network-scanner
+    user: "1000:1000"   # daniel on residencehome, so ./data stays editable without sudo
     restart: unless-stopped
     environment:
       - TZ=Asia/Jerusalem
