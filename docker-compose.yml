@@ -1,0 +1,29 @@
+name: network-scanner
+
+services:
+  network-scanner:
+    build: .
+    image: network-scanner:local
+    container_name: network-scanner
+    restart: unless-stopped
+    environment:
+      - TZ=Asia/Jerusalem
+      - SCANNER_URL=http://10.0.0.72/eSCL   # HP DeskJet 5200
+      - SCAN_DIR=/data/scans
+      - RETENTION_DAYS=30
+    volumes:
+      - ./data:/data
+    ports:
+      - "9191:8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=5)"]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: 172.16.68.0/24

@@ -1,0 +1,10 @@
+[project]
+name = "lan-network-scanner"
+version = "1.0.0"
+description = "HTTP API that scans from the HP DeskJet 5200 flatbed over eSCL"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn>=0.32",
+    "pillow>=11",
+]
